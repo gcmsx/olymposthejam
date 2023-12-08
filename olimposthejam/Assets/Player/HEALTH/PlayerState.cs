@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     public static PlayerState Instance { get; set; }
+    
+    // ---- Yazilar ---- //
+    public GameObject bilgilendirme1kj;
+    public GameObject bilgilendirme2o2;
 
     // ---- Player Health ---- //
     public float currentHealth;
@@ -69,6 +73,30 @@ public class PlayerState : MonoBehaviour
             currentCalories -= 1;
         }
 
+    }
+
+   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("kjrecoil"))
+        {
+           bilgilendirme1kj.SetActive(true);
+                if(Input.GetKeyDown(KeyCode.E)){
+                    currentCalories = maxCalories;
+                }
+
+        }
+        else if(other.CompareTag("o2recoil"))
+        {
+            bilgilendirme2o2.SetActive(true);
+
+        }
+    
+    }
+    
+    void OnTriggerExit(Collider other){
+        bilgilendirme1kj.SetActive(false);
+        bilgilendirme2o2.SetActive(false);
     }
 
     public void TakeDamage(float damage)

@@ -7,6 +7,8 @@ TagManager:
   - Esya
   - gen1
   - gen2
+  - o2recoil
+  - kjrecoil
   layers:
   - Default
   - TransparentFX

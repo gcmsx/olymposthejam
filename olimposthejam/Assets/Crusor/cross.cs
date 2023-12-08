@@ -28,13 +28,13 @@ public class cross : MonoBehaviour
         standardCross.gameObject.SetActive(false);
        }      
 
-       else if (hit.transform.tag == "gen1")
+       else if (hit.transform.tag == "gen1" || hit.transform.tag == "o2recoil" )
        {
          greenCross.gameObject.SetActive(true);
          standardCross.gameObject.SetActive(false);
        }
        
-        else if (hit.transform.tag == "gen2")
+        else if (hit.transform.tag == "gen2" || hit.transform.tag == "kjrecoil" )
        {
          redCross.gameObject.SetActive(true);
          standardCross.gameObject.SetActive(false);
