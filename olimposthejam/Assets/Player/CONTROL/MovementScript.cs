@@ -20,9 +20,7 @@ public class MovementScript : MonoBehaviour {
             if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
                 rb.AddRelativeForce(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, Input.GetAxisRaw("Vertical") * speed * Time.deltaTime, ForceMode.Impulse);
             else rb.velocity = Vector3.zero;
-            if(Input.GetKeyDown(KeyCode.Space)) {
-                rb.AddRelativeForce(0, 20, 0, ForceMode.Impulse);
-            }
+            
         }
         else {
             rb.velocity = Vector3.zero;
