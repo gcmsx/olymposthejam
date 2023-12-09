@@ -6,6 +6,9 @@ public class PlayerState : MonoBehaviour
 {
     public static PlayerState Instance { get; set; }
     
+    RaycastHit hit;
+    public float distance;
+
     // ---- Yazilar ---- //
     public GameObject bilgilendirme1kj;
     public GameObject bilgilendirme2o2;
@@ -64,6 +67,10 @@ public class PlayerState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+
+       
         distanceTravelled += Vector3.Distance(playerBody.transform.position, lastPosition);
         lastPosition = playerBody.transform.position;
 
@@ -72,32 +79,46 @@ public class PlayerState : MonoBehaviour
             distanceTravelled = 0;
             currentCalories -= 1;
         }
+     
+        if (Physics.Raycast(transform.position, fwd, out hit, distance))
+        {
+            if (hit.transform.tag == "o2recoil" )
+            {
+                bilgilendirme2o2.SetActive(true);
+
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                  
+                 currentOxigenPorcent = maxOxigenPorcent;
+                    
+                }
+            }
+            else{
+                bilgilendirme2o2.SetActive(false);
+            }
+        }
+        if (Physics.Raycast(transform.position, fwd, out hit, distance))
+        {
+            if (hit.transform.tag == "kjrecoil" )
+            {
+                bilgilendirme1kj.SetActive(true);
+
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                  
+                 currentCalories = maxCalories;
+                    
+                }
+            }
+            else{
+                bilgilendirme1kj.SetActive(false);
+            }
+        }
+
 
     }
 
    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("kjrecoil"))
-        {
-           bilgilendirme1kj.SetActive(true);
-                if(Input.GetKeyDown(KeyCode.E)){
-                    currentCalories = maxCalories;
-                }
-
-        }
-        else if(other.CompareTag("o2recoil"))
-        {
-            bilgilendirme2o2.SetActive(true);
-
-        }
-    
-    }
-    
-    void OnTriggerExit(Collider other){
-        bilgilendirme1kj.SetActive(false);
-        bilgilendirme2o2.SetActive(false);
-    }
 
     public void TakeDamage(float damage)
     {
