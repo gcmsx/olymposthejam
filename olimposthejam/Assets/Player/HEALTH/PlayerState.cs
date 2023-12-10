@@ -150,4 +150,16 @@ public class PlayerState : MonoBehaviour
     {
         currentOxigenPorcent = Oxigen;
     }
+
+    public void RefillOxygen(float amount)
+    {
+        currentOxigenPorcent += amount;
+        currentOxigenPorcent = Mathf.Clamp(currentOxigenPorcent, 0f, maxOxigenPorcent);
+    }
+
+    public void RefillCalories(float amount)
+    {
+        currentCalories += amount;
+        currentCalories = Mathf.Clamp(currentCalories, 0f, maxCalories);
+    }
 }
